@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Site Info -->
+    {% if title %}
+      <title>Phadon.Dev — {{ title }}</title>
+    {% else %}
+      <title>Phadon.Dev</title>
+    {% endif %}
+
+    <meta name="description" content="Phadon.Dev covering AI, Web3, Cloud Computing, Cybersecurity, and Future Technologies.">
+    <meta name="author" content="NextGen Tech">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Phadon.Dev">
+    <meta property="og:description" content="Exploring the future of technology — AI, Web3, Cloud, and beyond.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="">
+    <meta property="og:image" content="">
+    <meta property="og:image:alt" content="Phadon.Dev Preview">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300..900&family=Nunito:wght@300..1000&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          crossorigin="anonymous">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="/static/css/main.css">
+
+    <meta name="theme-color" content="#0d6efd">
+
+    <!-- Icons -->
+    <link rel="icon" href="/static/icons/favicon.ico" sizes="any">
+    <link rel="icon" href="/static/icons/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" sizes="180x180" href="/static/icons/icon.png">
+    <link rel="manifest" href="/static/site.webmanifest">
+  </head>
+
+  <body class="d-flex flex-column min-vh-100">
+    <header class="site-header">
+      <nav class="navbar navbar-expand-md bg-dark fixed-top" data-bs-theme="dark">
+        <div class="container">
+          <a class="navbar-brand fw-bold" href="#">🚀 NextGen Tech</a>
+
+          <button class="navbar-toggler" type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#navbarToggle">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarToggle">
+            <div class="navbar-nav me-auto">
+              <a class="nav-link active" href="#">Home</a>
+              <a class="nav-link" href="#">AI</a>
+              <a class="nav-link" href="#">Web3</a>
+              <a class="nav-link" href="#">Cloud</a>
+              <a class="nav-link" href="#">Tutorials</a>
+            </div>
+
+            <div class="navbar-nav">
+              <a class="btn btn-outline-light me-2" href="#">Login</a>
+              <a class="btn btn-primary me-3" href="#">Join</a>
+
+              <div class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="bd-theme" data-bs-toggle="dropdown">
+                  <span id="bd-theme-text">🌗 Auto</span>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end">
+                  <li><button class="dropdown-item" data-bs-theme-value="light">🌝 Light</button></li>
+                  <li><button class="dropdown-item" data-bs-theme-value="dark">🌚 Dark</button></li>
+                  <li><button class="dropdown-item" data-bs-theme-value="auto">🌗 Auto</button></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main role="main" class="container mt-5 pt-4">
+      <div class="row">
+        <div class="col-md-8">
+          {% block content %}
+          {% endblock content %}
+        </div>
+
+        <aside class="col-md-4">
+          <div class="content-section py-3 px-4 mb-4 border rounded">
+            <h4 class="fw-semibold">🔥 Trending Topics</h4>
+            <p class="text-body-secondary">What the future is building right now.</p>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">🤖 Artificial Intelligence</li>
+              <li class="list-group-item">🌐 Web3 & Blockchain</li>
+              <li class="list-group-item">☁️ Cloud & DevOps</li>
+              <li class="list-group-item">🔐 Cybersecurity</li>
+              <li class="list-group-item">🚀 Startups & Innovation</li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </main>
+
+    <footer class="mt-auto py-3 bg-body-tertiary border-top">
+      <div class="container text-center">
+        <p class="text-body-secondary mb-0">
+          © <span id="year"></span> Phadon.Dev — Built for the future
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+            crossorigin="anonymous"></script>
+
+    <script>
+      const setTheme = (theme) => {
+        if (theme === 'auto') {
+          document.documentElement.setAttribute(
+            'data-bs-theme',
+            window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+          );
+        } else {
+          document.documentElement.setAttribute('data-bs-theme', theme);
+        }
+        localStorage.setItem('theme', theme);
+        const text = { light: '🌝 Light', dark: '🌚 Dark', auto: '🌗 Auto' };
+        document.getElementById('bd-theme-text').textContent = text[theme];
+      };
+
+      document.querySelectorAll('[data-bs-theme-value]').forEach(btn =>
+        btn.addEventListener('click', () => setTheme(btn.dataset.bsThemeValue))
+      );
+
+      setTheme(localStorage.getItem('theme') || 'auto');
+    </script>
+  </body>
+</html>
